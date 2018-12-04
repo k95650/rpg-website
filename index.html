@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/scripts/table.css" />
     <script src="main.js"></script>
 </head>
-<body>
+<body onload="begin()">
     <h1>
         Welcome to my Web-Based RPG game!
     </h1>
@@ -29,9 +29,9 @@
             <th width="200px"class="tg-l8k9">Bad Guy</th>
           </tr>
           <tr>
-            <td id="td-player-life"class="tg-kndx">HP:</td>
+            <td id="td-player-life"class="tg-kndx"></td>
 
-            <td id="td-enemy-life"class="tg-58xp">HP:</td>
+            <td id="td-enemy-life"class="tg-58xp"></td>
           </tr>
           <tr>
             <td id="td-player-pw"class="tg-vswx">PW:</td>
@@ -46,4 +46,8 @@
         <button onclick="hit()">Hit</button>
 </div>
 </body>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.js"
+  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+  crossorigin="anonymous"></script>
 </html>

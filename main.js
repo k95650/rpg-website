@@ -9,26 +9,32 @@ var player = {hp:10, at:1};
 var enemy ={hp:10, at:1};
 
 
+function begin(){
+    document.getElementById("td-player-life").innerHTML ="HP: "+ player.hp;
+    document.getElementById("td-enemy-life").innerHTML ="HP: "+ enemy.hp;
+    document.getElementById("td-player-pw").innerHTML ="Power: " + pw;
+    document.getElementById("td-enemy-pw").innerHTML = "Power: " + pw;
+
+    return playerName;
+}
+
 function setPlayerName() {
     var x = document.getElementById("myName").value;
     document.getElementById("playerName").innerHTML = x;
     document.getElementById("myName").style.display = "none";
     document.getElementById('setName').style.display = 'none';
-    document.getElementById("td-player-life").innerHTML = life;
-    document.getElementById("td-enemy-life").innerHTML = life;
-    document.getElementById("td-player-pw").innerHTML = pw;
-    document.getElementById("td-enemy-pw").innerHTML = pw;
-    console.log(x);
-    return playerName;
+
 }
 function hit() {
-    function add() {
-        
-        return player.at + enemy.hp;
-       }
-           console.log(enemy.hp);
-           return add;
-}
+    enemy.hp = enemy.hp - player.at;
+    player.hp = player.hp - enemy.at;
+    document.getElementById("td-player-life").innerHTML ="HP: "+ player.hp;
+    document.getElementById("td-enemy-life").innerHTML ="HP: "+ enemy.hp;
+    console.log(enemy.hp);
+    if (player.hp <= 0) {
+        alert("GAME OVER!");
+    }
+  }
 function hit2() {
     var x = document.getElementById("td-player-life").value;
     var y = document.getElementById("td-enemy-life").value;
@@ -40,7 +46,9 @@ function hit2() {
     var c = parseInt(y) + parseInt(a);
  
 
-} console.log(player.at);
+} console.log(enemy.hp);
+
+
 
 
 
