@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RPG-Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/scripts/table.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1>
+        Welcome to my Web-Based RPG game!
+    </h1>
+    
+    <div align="center" class="b">
+            <input type="text" id="myName" placeholder="Enter your name">
+                        
+            <button id='setName' onclick="setPlayerName()">Submit</button>
+            
+            <p ></p>
+
+    </div>
+    <div class="tg-wrap"><table  class="tg"  width="400">
+          <tr>
+            <th id="playerName" width="200px" class="tg-usjd">Player</th>
+
+            <th width="200px"class="tg-l8k9">Bad Guy</th>
+          </tr>
+          <tr>
+            <td id="td-player-life"class="tg-kndx">HP:</td>
+
+            <td id="td-enemy-life"class="tg-58xp">HP:</td>
+          </tr>
+          <tr>
+            <td id="td-player-pw"class="tg-vswx">PW:</td>
+
+            <td id="td-enemy-pw"class="tg-vswx">PW:</td>
+          </tr>
+          <tr>
+            <td id="hit"class="tg-4f0n" colspan="3" onclick="hit2()">Hit</td>
+          </tr>
+        </table></div>
+
+        <button onclick="hit()">Hit</button>
+</div>
+</body>
+</html>
