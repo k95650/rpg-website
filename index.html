@@ -7,45 +7,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/scripts/table.css" />
-    <script src="main.js"></script>
+
 </head>
 <body onload="begin()">
+  <div>
+    <section id="top">
     <h1>
         Welcome to my Web-Based RPG game!
     </h1>
-    
-    <div align="center" class="b">
-            <input type="text" id="myName" placeholder="Enter your name">
-                        
-            <button id='setName' onclick="setPlayerName()">Submit</button>
-            
-            <p ></p>
-
-    </div>
-    <div class="tg-wrap"><table  class="tg"  width="400">
-          <tr>
-            <th id="playerName" width="200px" class="tg-usjd">Player</th>
-
-            <th width="200px"class="tg-l8k9">Bad Guy</th>
-          </tr>
-          <tr>
-            <td id="td-player-life"class="tg-kndx"></td>
-
-            <td id="td-enemy-life"class="tg-58xp"></td>
-          </tr>
-          <tr>
-            <td id="td-player-pw"class="tg-vswx">PW:</td>
-
-            <td id="td-enemy-pw"class="tg-vswx">PW:</td>
-          </tr>
-          <tr>
-            <td id="hit"class="tg-4f0n" colspan="3" onclick="hit2()">Hit</td>
-          </tr>
-        </table></div>
-
-        <button onclick="hit()">Hit</button>
+  </section>
+    <section id="left">
+Testing
+<div>
+  <h3>Stats</h3>
+  <p>Level: <span id="level"></span></p>
+  <p>Total experience: <span id="totalExp"></span></p>
+  <p>Health: <span id="currentHp"></span>/<span id="maxHp"></span></p>
+  <p>Energy: <span id="currentEnergy"></span>/<span id="maxEnergy"></span></p>
+  <p>Gold: <span id="gold"></span></p>
+  <p>Diamonds: <span id="diamonds"></span></p>
+  <div>
+    <h3>Skills</h3>
+    <p>Melee: <span id="melee"></span></p>
+    <p>Spells: <span id="spells"></span></p>
+    <p>Archery: <span id="archery"></span></p>
+    <p>Fishing: <span id="fishing"></span></p>
+    <p>Mining: <span id="mining"></span></p>
+    <p>Crafting: <span id="crafting"></span></p>
+  </div>
 </div>
+  </section> 
+  <section id="middle">
+      <div align="center" class="b">
+          <input type="text" id="myName" placeholder="Enter your name">
+                      
+          <button id='setName' onclick="setPlayerName()">Submit</button>
+
+  </div>
+<div class="tg-wrap">
+  <table class="tg" width="400">
+    <tr>
+      <th id="playerName" width="200px" class="playerLifeTable">Player</th>
+      <th width="200px" class="tg-l8k9">Bad Guy</th>
+    </tr>
+    <tr>
+      <td id="td-player-life" class="tg-kndx"></td>
+      <td id="td-enemy-life" class="tg-58xp"></td>
+    </tr>
+    <tr>
+      <td id="td-player-pw" class="tg-vswx">PW:</td>
+      <td id="td-enemy-pw" class="tg-vswx">PW:</td>
+    </tr>
+    <tr>
+      <td id="hit" class="tg-4f0n" colspan="2" onclick="hit()">Hit</td>
+    </tr>
+  </table>
+</div>
+<div class="buttom-mid">
+    <h1 id="updateText"></h1>
+  </div> 
+</section>
+<section id="right">
+  testing
+
+<button onclick="hit()">Hit</button>
+</div>
+</section>
+
 </body>
+<script src="main.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.js"
   integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="

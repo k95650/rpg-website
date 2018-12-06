@@ -4,6 +4,28 @@
 /*fontawesome icon font*/
 @import url('http://thecodeplayer.com/uploads/fonts/font-awesome-4.1.0/css/font-awesome.min.css');
 
+
+section#top {
+    background-color: yellow;
+}
+section#left {
+    background-color: red;
+    display: flex;
+    flex-flow: row;
+    float: left;
+    border: solid 1px black;
+    padding: 20px;
+}
+section#middle {
+    background-color: royalblue;
+    float: middle;
+}
+section#right {
+    background-color: rosybrown;
+    float: right;
+}
+
+
 .b{
     width: auto; 
     margin-left: auto;
@@ -12,3 +34,14 @@
 .tg{
     margin-top:200px;
 }
+
+
+  #statistics{
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  #statistics div{
+    border: solid 1px black;
+    padding: 20px;
+  }

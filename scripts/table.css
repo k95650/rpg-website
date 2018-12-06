@@ -31,6 +31,18 @@
 .tg .tg-4f0n{background-color:#000000;color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
 .tg .tg-58xp{background-color:#34ff34;border-color:#000000;text-align:center;vertical-align:top}
 .tg .tg-l8k9{background-color:#f8ff00;color:#000000;border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-usjd{background-color:#3531ff;color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
+.tg .playerLifeTable{background-color:#3531ff;color:#ffffff;border-color:inherit;text-align:center;vertical-align:top}
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}
+@media screen and (max-width: 767px)
+ {
+     .tg {
+     width: auto !important;
+    }
+    .tg col 
+    {width: auto !important;
+    }
+    .tg-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}

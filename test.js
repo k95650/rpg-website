@@ -1,12 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     showStats();
 });
-// Fuction constructor
-
-var playerName = '';
-var life = 10;
-var attack = 'attack';
-var pw = 1;
 
 let player = {
     stats: {
@@ -18,8 +12,8 @@ let player = {
         "currentEnergy": 100,
         "maxMana": 100,
         "currentMana": 100,
-        "gold": 1,
-        "pw": 2
+        "gold": 100,
+        "diamonds": 0,
     },
     skills: {
         fighting: {
@@ -45,32 +39,24 @@ let player = {
         crafting: {
             "lvl": 1,
             "exp": 0,
-        }
+        },
     }
-};
-
-
-let enemy = {
-    stats: {
-        "maxHp": 10,
-        "currentHp": 10,
-        "pw": 1
-    }
-};
+}; // Missing semicolon
 
 const skillExp = {
     1: 0,
-    2: 5,
-    3: 11,
-    4: 20,
-    5: 35,
-    6: 55,
-    7: 85,
-    8: 130,
-    9: 190,
-    10: 270,
-    11: 370,
-};
+    2: 500,
+    3: 1100,
+    4: 2000,
+    5: 3500,
+    6: 5500,
+    7: 8500,
+    8: 13000,
+    9: 19000,
+    10: 27000,
+    11: 37000,
+}; // Missing semicolon
+
 // Because skillExp is an object, not an array, we have to get the keys (as an array), and get the last value.
 // Saves performing this lookup (on a static set of values) every time it is needed.
 // If you add more levels, this will always return the last one.
@@ -78,10 +64,8 @@ const maxSkillLevel = parseInt(Object.keys(skillExp)[Object.keys(skillExp).lengt
 
 // Use a shortcut to get to the common things you wish to access; reduces code and easier to read.
 // Could reduce further to gold, currentEnergy, etc. if you think it applicable.
-let pStats = player.stats;
-let pSkills = player.skills;
-let eStats = enemy.stats;
-let eSkills = enemy.skills;
+let stats = player.stats;
+let skills = player.skills;
 
 // Get the DOM Elements into variables once; not every time you want to access them.
 let elemLevel = document.getElementById('level');
@@ -91,8 +75,9 @@ let elemMaxHp = document.getElementById('maxHp');
 let elemCurrentEnergy = document.getElementById('currentEnergy');
 let elemMaxEnergy = document.getElementById('maxEnergy');
 let elemGold = document.getElementById('gold');
-let elemMelee = document.getElementById('melee');
-let elemSpells = document.getElementById('spells');
+let elemDiamonds = document.getElementById('diamonds');
+let elemFighting = document.getElementById('fighting');
+let elemSpellcasting = document.getElementById('spellcasting');
 let elemArchery = document.getElementById('archery');
 let elemFishing = document.getElementById('fishing');
 let elemMining = document.getElementById('mining');
@@ -100,65 +85,49 @@ let elemCrafting = document.getElementById('crafting');
 let elemCurrentGold = document.getElementById('current-gold');
 let elemInfo = document.getElementById('info');
 
-function begin(){
-    document.getElementById("td-player-life").innerHTML ="HP: "+player.stats.currentHp+"/"+player.stats.maxHp;
-    document.getElementById("td-enemy-life").innerHTML ="HP: "+enemy.stats.currentHp+"/"+enemy.stats.maxHp;
-    document.getElementById("td-player-pw").innerHTML ="Power: " + pw;
-    document.getElementById("td-enemy-pw").innerHTML = "Power: " + pw;
+// Remove main function - not required. Call mine function directly.
 
-    return playerName;
-}
 // REFILL PLAYERS ENERGY
 function addEnergy() {
-    pStats.currentEnergy = 100;
-    pStats.gold -= 100;
+    stats.currentEnergy = 100;
+    stats.gold -= 100;
     elemInfo.textContent = "";
     showStats();
 }
-function setPlayerName() {
-    var x = document.getElementById("myName").value;
-    document.getElementById("playerName").innerHTML = x;
-    document.getElementById("myName").style.display = "none";
-    document.getElementById('setName').style.display = 'none';
 
+// MINE ACTION
+function mine() {
+    // Removed minedGold and info variables from global scope, and now using them directly where needed.
+    // Pass the minedGold and message values on to any function that requires them..
+    var minedGold = 0;
+    var message = "";
+    if (stats.currentEnergy >= 10) {
+        minedGold = Math.floor((Math.random() * 100) + (skills.mining.lvl * 2));
+        stats.gold += minedGold;
+        stats.currentEnergy -= 10;
+        calculateExp(skills.mining, minedGold);
+        showStats(); // Update stats when finished mining. No need to call this if mining didn't occur.
+    }
+    else {
+        message = "Not enough energy";
+    }
+    // Removed call to mineInfo() from first if block;
+    // Previously, (without curly braces around second if block), 
+    // the second mineInfo() would be called even if it was called in the first block.
+    // Only the first line of code after an if/else etc. will be called when matched, 
+    // everything after will run as normal code - because not encased in a block.
+    mineInfo(message, minedGold);
 }
-function hit() {
-    
-    
-    elemCurrentEnergy.textContent = pStats.currentEnergy;
-    document.getElementById("td-player-life").innerHTML ="HP: "+player.stats.currentHp+"/"+player.stats.maxHp;
-    document.getElementById("td-enemy-life").innerHTML ="HP: "+enemy.stats.currentHp+"/"+enemy.stats.maxHp;
-    if (pStats.currentEnergy <= 0){
 
-    document.getElementById("updateText").innerHTML ="You need more energy";}
-        else{
-            pStats.currentEnergy = pStats.currentEnergy -10;
-            eStats.currentHp = eStats.currentHp - pStats.pw;
-            pStats.currentHp = pStats.currentHp - eStats.pw;
-            
-        }
-    if (pStats.currentHp <= 0) {
-        alert("GAME OVER!");
-    }
-    if (eStats.currentHp <= 0) {
-        pStats.gold= pStats.gold+1;
-        eStats.currentHp = 10;
-    }
-    pStats.gold= pStats.gold;
-  }
-function hit2() {
-    var x = document.getElementById("td-player-life").value;
-    var y = document.getElementById("td-enemy-life").value;
-    var a = document.getElementById("td-player-pw").value;
-    var b = document.getElementById("td-enemy-pw").value;
-    document.getElementById("td-player-life").innerHTML = z;
-    document.getElementById("td-enemy-life").innerHTML = c;
-    var z = parseInt(x) + parseInt(b);
-    var c = parseInt(y) + parseInt(a);
- 
-
-} 
-
+// DISPLAY MINING COMUNICATES
+function mineInfo(message, minedGold) {
+    // Pass in any message to display, rather than relying on a global variable (that some other action may change).
+    // Same for minedGold.
+    // This way, this function doesn't have to rely on variables outside of its scope, 
+    // that could change or move in the future - Separation Of Concerns.
+    elemCurrentGold.textContent = minedGold;
+    elemInfo.textContent = message;
+}
 
 // ADD EXP AND CHECK FOR LVL UP
 function calculateExp(skillName, expGained) {
@@ -180,30 +149,18 @@ function showStats() {
     // Use textContent rather than innerHTML.
     // If you need to place style tags etc. in your text (e.g <b>Hello world</b>), then innerHTML is the way to go.
     // But you should try to style the elements themselves rather than the text within.
-    elemLevel.textContent = pStats.level;
-    elemTotalExp.textContent = pStats.experience;
-    elemCurrentHp.textContent = pStats.currentHp;
-    elemMaxHp.textContent = pStats.maxHp;
-    elemCurrentEnergy.textContent = pStats.currentEnergy;
-    elemMaxEnergy.textContent = pStats.maxEnergy;
-    elemGold.textContent = pStats.gold;
-    elemMelee.textContent = skills.melee.lvl;
-    elemSpells.textContent = skills.spells.lvl;
+    elemLevel.textContent = stats.level;
+    elemTotalExp.textContent = stats.experience;
+    elemCurrentHp.textContent = stats.currentHp;
+    elemMaxHp.textContent = stats.maxHp;
+    elemCurrentEnergy.textContent = stats.currentEnergy;
+    elemMaxEnergy.textContent = stats.maxEnergy;
+    elemGold.textContent = stats.gold;
+    elemDiamonds.textContent = stats.diamonds;
+    elemFighting.textContent = skills.fighting.lvl;
+    elemSpellcasting.textContent = skills.spellcasting.lvl;
     elemArchery.textContent = skills.archery.lvl;
     elemFishing.textContent = skills.fishing.lvl;
     elemMining.textContent = skills.mining.lvl;
     elemCrafting.textContent = skills.crafting.lvl;
-    document.getElementById("td-player-life").innerHTML ="HP: "+player.stats.currentHp+"/"+player.stats.maxHp;
-    document.getElementById("td-enemy-life").innerHTML ="HP: "+enemy.stats.currentHp+"/"+enemy.stats.maxHp;
-    
 }
-
-console.log(pStats.maxEnergy);
-
-
-
-
-
-
-
-

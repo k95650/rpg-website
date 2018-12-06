@@ -1,0 +1,38 @@
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main>
+  <section>
+    <p>Gold mined: <span id="current-gold">0</span></p>
+    <button onclick="main()">Mine</button>
+    <button onclick="addEnergy()">Get energy drink (100 gold)</button>
+    <p id="info"></p>
+  </section>
+  <section id="statistics">
+    <div>
+      <h3>Statistics</h3>
+      <p>Level: <span id="level"></span></p>
+      <p>Total experience: <span id="totalExp"></span></p>
+      <p>Health: <span id="currentHp"></span>/<span id="maxHp"></span></p>
+      <p>Energy: <span id="currentEnergy"></span>/<span id="maxEnergy"></span></p>
+      <p>Gold: <span id="gold"></span></p>
+      <p>Diamonds: <span id="diamonds"></span></p>
+    </div>
+    <div>
+      <h3>Skills</h3>
+      <p>Fighting: <span id="fighting"></span></p>
+      <p>Spellcasting: <span id="spellcasting"></span></p>
+      <p>Archery: <span id="archery"></span></p>
+      <p>Fishing: <span id="fishing"></span></p>
+      <p>Mining: <span id="mining"></span></p>
+      <p>Crafting: <span id="crafting"></span></p>
+    </div>
+  </section>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
