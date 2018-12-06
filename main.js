@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     showStats();
 });
 // Fuction constructor
-
+var timer;
 var playerName = '';
 var life = 10;
 var attack = 'attack';
 var pw = 1;
-
+var counter = 0;
 let player = {
     stats: {
         "level": 1,
@@ -22,11 +22,11 @@ let player = {
         "pw": 2
     },
     skills: {
-        fighting: {
+        melee: {
             "lvl": 1,
             "exp": 0,
         },
-        spellcasting: {
+        spells: {
             "lvl": 1,
             "exp": 0,
         },
@@ -106,8 +106,8 @@ function begin(){
     document.getElementById("td-player-pw").innerHTML ="Power: " + pw;
     document.getElementById("td-enemy-pw").innerHTML = "Power: " + pw;
 
-    return playerName;
 }
+
 // REFILL PLAYERS ENERGY
 function addEnergy() {
     pStats.currentEnergy = 100;
@@ -120,17 +120,16 @@ function setPlayerName() {
     document.getElementById("playerName").innerHTML = x;
     document.getElementById("myName").style.display = "none";
     document.getElementById('setName').style.display = 'none';
-
+    return playerName;
 }
 function hit() {
     
-    
+    elemGold.textContent = pStats.gold;
     elemCurrentEnergy.textContent = pStats.currentEnergy;
     document.getElementById("td-player-life").innerHTML ="HP: "+player.stats.currentHp+"/"+player.stats.maxHp;
     document.getElementById("td-enemy-life").innerHTML ="HP: "+enemy.stats.currentHp+"/"+enemy.stats.maxHp;
-    if (pStats.currentEnergy <= 0){
-
-    document.getElementById("updateText").innerHTML ="You need more energy";}
+    if (pStats.currentEnergy <= 9){
+    document.getElementById("updateText").innerHTML ="You need more energy please wait a few then try again";}
         else{
             pStats.currentEnergy = pStats.currentEnergy -10;
             eStats.currentHp = eStats.currentHp - pStats.pw;
@@ -141,24 +140,15 @@ function hit() {
         alert("GAME OVER!");
     }
     if (eStats.currentHp <= 0) {
-        pStats.gold= pStats.gold+1;
+        pStats.experience++;
+        pSkills.fighting++;
+        pStats.gold++;
         eStats.currentHp = 10;
     }
     pStats.gold= pStats.gold;
+    console.log(pStats.gold);
+
   }
-function hit2() {
-    var x = document.getElementById("td-player-life").value;
-    var y = document.getElementById("td-enemy-life").value;
-    var a = document.getElementById("td-player-pw").value;
-    var b = document.getElementById("td-enemy-pw").value;
-    document.getElementById("td-player-life").innerHTML = z;
-    document.getElementById("td-enemy-life").innerHTML = c;
-    var z = parseInt(x) + parseInt(b);
-    var c = parseInt(y) + parseInt(a);
- 
-
-} 
-
 
 // ADD EXP AND CHECK FOR LVL UP
 function calculateExp(skillName, expGained) {
@@ -195,10 +185,27 @@ function showStats() {
     elemCrafting.textContent = skills.crafting.lvl;
     document.getElementById("td-player-life").innerHTML ="HP: "+player.stats.currentHp+"/"+player.stats.maxHp;
     document.getElementById("td-enemy-life").innerHTML ="HP: "+enemy.stats.currentHp+"/"+enemy.stats.maxHp;
-    
+
+
+
 }
 
-console.log(pStats.maxEnergy);
+(function(){
+    if(pStats.currentEnergy <= 100){
+    pStats.currentEnergy++;
+    if(pStats.currentEnergy >= 100){
+        pStats.currentEnergy= 100;
+    }
+
+    setTimeout(arguments.callee, 600);
+    }
+})();
+
+setInterval(function(){
+    showStats();
+}, 1000);
+
+console.log(pStats.Energy);
 
 
 
